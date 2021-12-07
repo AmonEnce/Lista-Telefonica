@@ -9,79 +9,43 @@ namespace ListaTelefonica
         {
             try
             {
-                ListaDeContatos listaTelefonica = new ListaDeContatos();
+                Contato contato = new Contato();
+                Menu menu = new Menu();
 
                 Console.WriteLine("------LISTA TELEFONICA------");
-                Console.WriteLine("Deseja incluir um novo contato(C - Continuar)");
-                char incluir = char.Parse(Console.ReadLine());
+                menu.MenuIncluir(contato);
+                char incluir = 'c';
 
-                while (incluir == 'C' || incluir == 'c')
+                while (incluir == 'c')
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Novo Contato");
-                    Console.Write("Codigo: ");
-                    int codigo = int.Parse(Console.ReadLine());
-                    Console.Write("Nome: ");
-                    string nome = Console.ReadLine();
-                    Console.Write("Telefone: ");
-                    string telefone = Console.ReadLine();
-
-                    if (String.IsNullOrWhiteSpace(nome) && String.IsNullOrWhiteSpace(telefone) && String.IsNullOrWhiteSpace(codigo + ""))
-                    {
-                        throw new DomainExeception("Os Campos Obrigatorios não foram preenchidos corretamente !");
-                    }
-                    else
-                    {
-                        Contato contato = new Contato(nome, telefone, codigo);
-                        listaTelefonica.AdicionarContato(contato);
-                    }
-
-
                     Console.WriteLine();
                     Console.WriteLine("Para continuar ou sair informe uma das opções abaixo");
                     Console.WriteLine("E - Editar / R - Remover / I - incluir / L - Lista de Contatos / S - Sair");
-                    char resposta = char.Parse(Console.ReadLine());
+                    char resposta = char.Parse(Console.ReadLine().ToUpper());
                     Console.WriteLine();
 
-                    if (resposta == 'E' || resposta == 'e')
+                    switch (resposta)
                     {
-                        Console.Write("Informe o codigo do contato a ser Editado: ");
-                        int codigoProcurado = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Informe os novos dados do contato");
-                        Console.Write("Nome: ");
-                        nome = Console.ReadLine();
-                        Console.Write("Telefone: ");
-                        telefone = Console.ReadLine();
-
-                        listaTelefonica.EditarContato(codigoProcurado, nome, telefone);
-                        Console.WriteLine("Editado Com Sucesso !");
-                    }
-                    else if (resposta == 'R' || resposta == 'r')
-                    {
-                        Console.Write("Informe o codigo do contato a ser Removido");
-                        int codigoProcurado = int.Parse(Console.ReadLine());
-
-                        listaTelefonica.RemoverContato(codigoProcurado);
-                        Console.WriteLine("Removido Com Sucesso !");
-                    }
-                    else if (resposta == 'N' || resposta == 'n')
-                    {
-                        incluir = resposta;
-                    }
-                    else if (resposta == 'L' || resposta == 'l')
-                    {
-                        foreach (Contato print in listaTelefonica)
-                        {
-                            Console.WriteLine(print);
-                        }
-                    }
-                    else
-                    {
-
+                        case 'E':
+                            menu.MenuEditar(contato);
+                            break;
+                        case 'R':
+                            menu.MenuRemover(contato);
+                            break;
+                        case 'I':
+                            menu.MenuIncluir(contato);
+                            break;
+                        case 'L':
+                            menu.MenuListar();
+                            break;
+                        case 'S':
+                            incluir = 'S';
+                            Console.WriteLine("Finalizando o programa ! Até a proxima ");
+                            break;
                     }
                 }
             }
-            catch(DomainExeception erro)
+            catch (DomainExeception erro)
             {
                 Console.WriteLine(erro.Message);
             }
