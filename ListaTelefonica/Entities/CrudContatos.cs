@@ -31,7 +31,6 @@ namespace ListaTelefonica.Entities
         {
             return contatos.GetEnumerator();
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();

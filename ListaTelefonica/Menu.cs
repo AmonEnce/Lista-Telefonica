@@ -38,7 +38,7 @@ namespace ListaTelefonica
                 Console.Clear();
             }
         }
-        public void MenuRemover(Contato contato)
+        public void MenuRemover()
         {
             Console.Write("Informe o codigo do contato a ser Removido");
             int codigoProcurado = int.Parse(Console.ReadLine());
@@ -47,7 +47,7 @@ namespace ListaTelefonica
             Console.Clear();
             Console.WriteLine("Removido Com Sucesso !");
         }
-        public void MenuEditar(Contato contato)
+        public void MenuEditar()
         {
             lista = crud.MenuLista();
             Console.Write("Informe o codigo do contato a ser Editado: ");
@@ -70,7 +70,8 @@ namespace ListaTelefonica
             } 
         }
         public void MenuListar()
-        { 
+        {
+            lista = crud.MenuLista();
             foreach(Contato c in lista)
             {
                 Console.WriteLine(c);

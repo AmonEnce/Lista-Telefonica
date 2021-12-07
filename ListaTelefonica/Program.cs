@@ -27,10 +27,10 @@ namespace ListaTelefonica
                     switch (resposta)
                     {
                         case 'E':
-                            menu.MenuEditar(contato);
+                            menu.MenuEditar();
                             break;
                         case 'R':
-                            menu.MenuRemover(contato);
+                            menu.MenuRemover();
                             break;
                         case 'I':
                             menu.MenuIncluir(contato);
